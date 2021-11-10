@@ -13,6 +13,7 @@ import { formatUnits } from 'lib/web3-utils'
 import { useConvertInputs } from './useConvertInputs'
 
 import question from './assets/question.svg'
+import { COLORS } from 'components/utils/constants'
 
 const options = ['COLLATERAL', 'BONDED']
 
@@ -281,11 +282,11 @@ function Docs() {
 }
 
 const Button = styled.button`
-  background: linear-gradient(189.76deg, #ffb36d 6.08%, #ff8888 93.18%);
+  background: ${COLORS.ACCENT};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   border: solid 0px transparent;
   border-radius: 6px;
-  color: white;
+  color: ${COLORS.FONT_BUTTON_ACCENT};
   width: 100%;
   max-width: 470px;
   height: 52px;

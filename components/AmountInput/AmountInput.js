@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useViewport } from 'use-viewport'
+import { COLORS } from 'components/utils/constants'
 
 function getTokenName(symbol) {
   if (symbol === 'COLLATERAL') {
@@ -68,7 +69,7 @@ function AmountInput({
           width: 100%;
           text-align: center;
           font-weight: 600;
-          color: ${color ? '#1c1c1c' : '#FFF'};
+          color: ${color ? COLORS.FONT : '#FFF'};
           font-size: ${isCompact ? '36px' : '88px'};
           background: transparent;
           border: 0;

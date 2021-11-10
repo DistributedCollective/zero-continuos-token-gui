@@ -3,12 +3,13 @@ import { useSpring, useTransition, animated } from 'react-spring'
 import { useAnimateWhenMounted, SPRING_FAST } from 'lib/animation-utils'
 import { ABSOLUTE_FILL } from 'lib/css-utils'
 import InvertButton from './InvertButton'
+import { COLORS } from '../utils/constants';
 
 const REVEAL_SCALE_FROM = 0.9
 const REVEAL_OVERLAY_OPACITY = 0.1
 
-const BANNER_COLLATERAL = 'black'
-const BANNER_BONDED = 'gray'
+const BANNER_COLLATERAL = COLORS.COLLATERAL;
+const BANNER_BONDED = COLORS.BONDED;
 
 function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
   const invertButtonRef = useRef(null)
@@ -206,7 +207,7 @@ function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
                     justify-content: center;
                     width: 100%;
                     height: 100%;
-                    background: #fff;
+                    background: ${COLORS.BACKGROUND};
                   `}
                 >
                   {secondary}

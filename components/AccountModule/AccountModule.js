@@ -12,6 +12,7 @@ import frame from './provider-icons/frame.svg'
 import metamask from './provider-icons/metamask.svg'
 import portis from './provider-icons/portis.svg'
 import lightning from './lightning.svg'
+import { COLORS } from 'components/utils/constants'
 
 function AccountModule() {
   const { account } = useWalletAugmented()
@@ -77,7 +78,7 @@ function DisconnectedMode() {
                 height: 32px;
                 border-bottom: 0.5px solid #dde4e8;
                 text-transform: uppercase;
-                color: #637381;
+                color: ${COLORS.FONT};
               `}
             >
               <span
@@ -261,7 +262,7 @@ const StyledPopover = styled(Popover)`
       background: transparent;
       border: 0;
       cursor: pointer;
-      color: #637381;
+      color: ${COLORS.FONT};
     }
     button:hover {
       color: #212b36;

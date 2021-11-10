@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'styled-components'
+import { COLORS } from '../utils/constants'
 
 const MODE_STYLE = {
   primary: css`
-    background: linear-gradient(189.76deg, #ffb36d 6.08%, #ff8888 93.18%);
+    background: ${COLORS.ACCENT};
     border: solid 0px transparent;
     color: white;
   `,

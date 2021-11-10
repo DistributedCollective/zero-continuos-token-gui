@@ -17,12 +17,12 @@ if (env('SENTRY_DSN')) {
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: 'Manrope';
-    src: url('/fonts/ManropeGX.ttf');
+    font-family: 'Monserrat';
+    src: url('/fonts/Monserrat-Regular.ttf');
   }
   body,
   button {
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Monserrat', sans-serif;
   }
   body,
   html {
@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
     <ViewportProvider>
       <animated.div style={revealProps}>
         <NextHead>
-          <title>Aragon Converter</title>
+          <title>Bonded Token Converter</title>
         </NextHead>
         <GlobalStyles />
         <WalletProvider>

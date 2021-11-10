@@ -14,6 +14,7 @@ import Step from './Step'
 import StepperLayout from './StepperLayout'
 import StepperTitle from './StepperTitle'
 import useStepLayout from './useStepLayout'
+import { COLORS } from 'components/utils/constants'
 
 function initialStepState(steps) {
   return steps.map(() => {
@@ -158,7 +159,7 @@ function ConvertSteps({
           <h1
             css={`
               ${stepLayoutName === 'large' && 'margin-bottom: 80px'};
-              color: #20232c;
+              color: ${COLORS.FONT};
               text-align: center;
               padding-left: 40px;
               padding-right: 40px;
@@ -177,7 +178,7 @@ function ConvertSteps({
               css={`
                 margin-top: 5px;
                 margin-bottom: 50px;
-                color: #6d7693;
+                color: ${COLORS.FONT};
               `}
             >
               {stepperStage + 1} out of {steps.length} transactions

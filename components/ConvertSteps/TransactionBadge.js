@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Anchor from '../Anchor/Anchor'
 import { shortenAddress } from 'lib/web3-utils'
 import { getEtherscanHref } from 'lib/utils'
+import { COLORS } from 'components/utils/constants'
 
 function TransactionBadge({ transactionHash, className }) {
   return (
@@ -20,7 +21,7 @@ function TransactionBadge({ transactionHash, className }) {
       <Anchor
         href={getEtherscanHref(transactionHash)}
         css={`
-          color: #20232c;
+          color: ${COLORS.FONT};
 
           &:hover {
             text-decoration: initial;
