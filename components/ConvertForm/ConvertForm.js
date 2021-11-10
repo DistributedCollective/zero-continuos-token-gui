@@ -14,7 +14,7 @@ import { useConvertInputs } from './useConvertInputs'
 
 import question from './assets/question.svg'
 
-const options = ['ANT', 'ANJ']
+const options = ['COLLATERAL', 'BONDED']
 
 const CONVERTER_STATUSES = {
   FORM: Symbol('STATE_FORM'),
@@ -83,7 +83,7 @@ function ConvertForm() {
     if (formStatus !== CONVERTER_STATUSES.FORM) {
       return 'normal'
     }
-    return inverted ? 'anj' : 'ant'
+    return inverted ? 'bonded' : 'collateral'
   }, [formStatus, inverted])
 
   return (
@@ -107,7 +107,7 @@ function ConvertForm() {
           >
             <AmountInput
               error={inputError}
-              symbol={inverted ? 'ANJ' : 'ANT'}
+              symbol={inverted ? 'BONDED' : 'COLLATERAL'}
               color={false}
               value={inputValueSource}
               disabled={inputDisabled}
@@ -138,18 +138,18 @@ function ConvertForm() {
             `}
           >
             <AmountInput
-              symbol={inverted ? 'ANT' : 'ANJ'}
+              symbol={inverted ? 'COLLATERAL' : 'BONDED'}
               color={true}
               value={inputValueRecipient}
               onChange={() => null}
             />
             <LabelWithOverlay
               label="The conversion amount is an estimate"
-              description="This tool uses a bonding curve to convert ANT into ANJ and
+              description="This tool uses a bonding curve to convert COLLATERAL into BONDED and
                       back at a pre-defined rate. The price is calculated by an
                       automated market maker smart contract that defines a
                       relationship between token price and token supply. You can
-                      also convert ANT into other tokens such as ETH or DAI on
+                      also convert COLLATERAL into other tokens such as ETH or DAI on
                       various exchanges like
                       Uniswap.
 "
@@ -196,7 +196,7 @@ function ConvertForm() {
                   />
                   By clicking on “Convert” you are accepting our{' '}
                   <Anchor
-                    href="https://anj.aragon.org/legal/terms-general.pdf"
+                    href="https://bonded.aragon.org/legal/terms-general.pdf"
                     target="_blank"
                   >
                     legal terms
@@ -266,7 +266,7 @@ function Docs() {
       `}
     >
       <li>
-        <Anchor href="https://anj.aragon.org/">About</Anchor>
+        <Anchor href="https://bonded.aragon.org/">About</Anchor>
       </li>
       <li>
         <Anchor href="https://help.aragon.org/article/41-aragon-court">
@@ -330,12 +330,12 @@ const MaxButton = styled.button`
   border: 1px solid #fff;
   border-radius: 3px;
   cursor: pointer;
-  outline: 0 !important;
+  outline: 0 !importcollateral;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 
   &:hover,
   &:active {
-    outline: 0 !important;
+    outline: 0 !importcollateral;
   }
   &:focus,
   &:active {

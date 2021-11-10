@@ -4,14 +4,11 @@ import { useAnimateWhenMounted, SPRING_FAST } from 'lib/animation-utils'
 import { ABSOLUTE_FILL } from 'lib/css-utils'
 import InvertButton from './InvertButton'
 
-import illustrationAnt from './banner-illustration-ant.svg'
-import illustrationAnj from './banner-illustration-anj.svg'
-
-const BANNER_ANT = [illustrationAnt, '304deg, #01E8F7 18%, #00C2FF 80%']
-const BANNER_ANJ = [illustrationAnj, '208deg, #FFB36D 6%,  #FF8888 93%']
-
 const REVEAL_SCALE_FROM = 0.9
 const REVEAL_OVERLAY_OPACITY = 0.1
+
+const BANNER_COLLATERAL = 'black'
+const BANNER_BONDED = 'gray'
 
 function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
   const invertButtonRef = useRef(null)
@@ -149,7 +146,7 @@ function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
         >
           {primaryTransitions.map(
             ({ item: { inverted, opened }, key, props }) => {
-              const [image, gradient] = inverted ? BANNER_ANJ : BANNER_ANT
+              const backgroundColor = inverted ? BANNER_BONDED : BANNER_COLLATERAL
               return opened ? null : (
                 <animated.div
                   key={key}
@@ -161,8 +158,7 @@ function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
                     justify-content: center;
                     width: 100%;
                     height: 100%;
-                    background: 50% 100% / contain no-repeat url(${image}),
-                      linear-gradient(${gradient}) !important;
+                    background: ${backgroundColor};
                   `}
                 >
                   {primary}

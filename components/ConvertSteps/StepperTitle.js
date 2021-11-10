@@ -14,8 +14,8 @@ const smallCaps = css`
 `
 
 function StepperTitle({ fromAmount, convertedTotal, status, toAnj }) {
-  const antDecimals = useTokenDecimals('ANT')
-  const anjDecimals = useTokenDecimals('ANJ')
+  const antDecimals = useTokenDecimals('COLLATERAL')
+  const anjDecimals = useTokenDecimals('BONDED')
 
   const formattedFromAmount = formatUnits(fromAmount, {
     digits: toAnj ? antDecimals : anjDecimals,
@@ -33,8 +33,8 @@ function StepperTitle({ fromAmount, convertedTotal, status, toAnj }) {
     return (
       <>
         Convert {formattedFromAmount}{' '}
-        <span css={smallCaps}>{toAnj ? 'ANT' : 'ANJ'}</span> to{' '}
-        <span css={smallCaps}>{toAnj ? 'ANJ' : 'ANT'}</span>
+        <span css={smallCaps}>{toAnj ? 'COLLATERAL' : 'BONDED'}</span> to{' '}
+        <span css={smallCaps}>{toAnj ? 'BONDED' : 'COLLATERAL'}</span>
       </>
     )
   } else if (status === STEPPER_SUCCESS) {
@@ -42,8 +42,8 @@ function StepperTitle({ fromAmount, convertedTotal, status, toAnj }) {
       <>
         You successfully converted <br />
         {formattedFromAmount}{' '}
-        <span css={smallCaps}>{toAnj ? 'ANT' : 'ANJ'}</span> to {formattedTotal}{' '}
-        <span css={smallCaps}>{toAnj ? 'ANJ' : 'ANT'}</span>
+        <span css={smallCaps}>{toAnj ? 'COLLATERAL' : 'BONDED'}</span> to {formattedTotal}{' '}
+        <span css={smallCaps}>{toAnj ? 'BONDED' : 'COLLATERAL'}</span>
       </>
     )
   }

@@ -32,10 +32,10 @@ export function useConvertInputs(otherSymbol, toAnj = true) {
     loading: bondingPriceLoading,
     price: bondingCurvePrice,
   } = useBondingCurvePrice(amountSource, toAnj)
-  const anjDecimals = useTokenDecimals('ANJ')
+  const anjDecimals = useTokenDecimals('BONDED')
   const otherDecimals = useTokenDecimals(otherSymbol)
 
-  // convertFromAnj is used as a toggle to execute a conversion to or from ANJ.
+  // convertFromAnj is used as a toggle to execute a conversion to or from BONDED.
   const [convertFromAnj, setConvertFromAnj] = useState(false)
 
   const resetInputs = useCallback(() => {
@@ -50,7 +50,7 @@ export function useConvertInputs(otherSymbol, toAnj = true) {
     resetInputs()
   }, [otherSymbol, resetInputs])
 
-  // Calculate the ANJ amount from the other amount
+  // Calculate the BONDED amount from the other amount
   useEffect(() => {
     if (
       anjDecimals === -1 ||

@@ -38,15 +38,15 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
     let cancelled = false
 
     // Interacting with the bonding curve involves 2, 3 or 4 transactions (depending on the direction and state of allowance):
-    // 1. Reset approval (If we're converting ANT -> ANJ, an allowance was previously set but abandoned)
-    // 2. Raise approval (If we're converting ANT -> ANJ, the current allowance is not high enough)
+    // 1. Reset approval (If we're converting COLLATERAL -> BONDED, an allowance was previously set but abandoned)
+    // 2. Raise approval (If we're converting COLLATERAL -> BONDED, the current allowance is not high enough)
     // 3. Open a buy order
     // 4. Claim the order
     const createConvertSteps = async () => {
       let openOrderHash
       let steps = []
 
-      // First we check for allowance if the direction is ANT -> ANJ
+      // First we check for allowance if the direction is COLLATERAL -> BONDED
       if (toAnj) {
         const allowance = await getAllowance()
 
