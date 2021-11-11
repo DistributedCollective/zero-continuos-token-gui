@@ -152,7 +152,7 @@ function ConvertForm() {
                       automated market maker smart contract that defines a
                       relationship between token price and token supply. You can
                       also convert ${getTokenName(
-                        'COLLATERAL'
+                        'BONDED'
                       )} into other tokens on
                       various exchanges.`}
               overlayPlacement="top"
