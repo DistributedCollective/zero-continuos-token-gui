@@ -150,11 +150,7 @@ function ConvertForm() {
               )} into ${getTokenName('BONDED')} and
                       back at a pre-defined rate. The price is calculated by an
                       automated market maker smart contract that defines a
-                      relationship between token price and token supply. You can
-                      also convert ${getTokenName(
-                        'BONDED'
-                      )} into other tokens on
-                      various exchanges.`}
+                      relationship between token price and token supply.`}
               overlayPlacement="top"
             />
             <div
