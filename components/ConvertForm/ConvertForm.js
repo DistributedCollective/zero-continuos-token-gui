@@ -75,7 +75,6 @@ function ConvertForm() {
   const submitButtonDisabled = Boolean(
     !account ||
       bondingPriceLoading ||
-      !legalChecked ||
       !parseFloat(inputValueSource) > 0 ||
       inputError
   )
@@ -171,40 +170,6 @@ function ConvertForm() {
               <Button disabled={submitButtonDisabled} onClick={handleConvert}>
                 Convert
               </Button>
-              <div
-                css={`
-                  display: flex;
-                  align-items: center;
-                  margin-top: 24px;
-                `}
-              >
-                <label
-                  css={`
-                    font-size: 16px;
-                    line-height: 1.3;
-                    margin-bottom: 0;
-                    color: #9096b6;
-                  `}
-                >
-                  <input
-                    css={`
-                      cursor: pointer;
-                      margin-right: 8px;
-                    `}
-                    type="checkbox"
-                    onChange={handleLegalToggle}
-                    checked={legalChecked}
-                  />
-                  By clicking on “Convert” you are accepting our{' '}
-                  <Anchor
-                    href="https://bonded.aragon.org/legal/terms-general.pdf"
-                    target="_blank"
-                  >
-                    legal terms
-                  </Anchor>
-                  .
-                </label>
-              </div>
               <Docs />
             </div>
           </div>
@@ -273,9 +238,6 @@ function Docs() {
         <Anchor href="https://help.aragon.org/article/41-aragon-court">
           Docs
         </Anchor>
-      </li>
-      <li>
-        <Anchor href="https://court.aragon.org/dashboard">Court</Anchor>
       </li>
     </ul>
   )
