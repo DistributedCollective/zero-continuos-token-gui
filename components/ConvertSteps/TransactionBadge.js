@@ -11,7 +11,6 @@ function TransactionBadge({ transactionHash, className }) {
       className={className}
       css={`
         display: inline;
-        background: #ebfafd;
         border-radius: 4px;
         padding: 6px 12px;
         font-size: 16px;
@@ -25,7 +24,7 @@ function TransactionBadge({ transactionHash, className }) {
 
           &:hover {
             text-decoration: initial;
-            color: inherit;
+            color: ${COLORS.ACCENT};
           }
         `}
       >

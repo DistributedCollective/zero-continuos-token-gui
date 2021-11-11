@@ -56,6 +56,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
             'Raise approval',
             {
               onTxCreated: () => changeAllowance(fromAmount),
+              showDesc: true
             },
           ])
 
@@ -68,6 +69,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
               'Reset approval',
               {
                 onTxCreated: () => changeAllowance(0),
+                showDesc: true
               },
             ])
           }
@@ -84,6 +86,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
           onHashCreated: hash => {
             openOrderHash = hash
           },
+          showDesc: true
         },
       ])
 
@@ -91,6 +94,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
         'Wait for batch to finish',
         {
           onWaitCondition: () => waitForBatch(openOrderHash),
+          showDesc: false
         },
       ])
       // And finally the claim order
@@ -99,6 +103,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
         {
           onTxCreated: () => claimOrder(openOrderHash, toAnj),
           onTxMined: hash => updateConvertedValue(hash),
+          showDesc: true
         },
       ])
 

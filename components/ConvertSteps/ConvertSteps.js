@@ -131,6 +131,7 @@ function ConvertSteps({
         active={stepState[stepIndex].active}
         status={stepState[stepIndex].status}
         transactionHash={stepState[stepIndex].hash}
+        showDesc={steps[stepIndex][1].showDesc}
       />
 
       {renderDivider && <Divider />}

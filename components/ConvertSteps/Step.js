@@ -61,7 +61,7 @@ function getBorderColor(status) {
   }
 }
 
-function Step({ title, status, active, number, className, transactionHash }) {
+function Step({ title, status, active, number, className, transactionHash, showDesc }) {
   const desc = useMemo(() => STATUS_DESC[status], [status])
   const borderColor = useMemo(() => getBorderColor(status), [status])
 
@@ -156,10 +156,7 @@ function Step({ title, status, active, number, className, transactionHash }) {
           color: ${status === STEP_SUCCESS ? '#2CC68F' : COLORS.FONT};
         `}
       >
-        {
-          // FIXME: Description should be properly shown
-          desc
-        }
+        {showDesc ? desc : ''}
       </p>
 
       <div
@@ -204,6 +201,7 @@ Step.propTypes = {
     STEP_SUCCESS,
     STEP_ERROR,
   ]),
+  showDesc: PropTypes.bool,
 }
 
 export default Step

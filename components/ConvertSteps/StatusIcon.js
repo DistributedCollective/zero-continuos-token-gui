@@ -16,8 +16,9 @@ const STATUS_ICONS = {
 }
 
 const PIP_ICONS = {
-  [STEP_ERROR]: errorPip,
-  [STEP_SUCCESS]: successPip,
+  // Not used on this fork
+  // [STEP_ERROR]: errorPip,
+  // [STEP_SUCCESS]: successPip,
 }
 
 function renderPipIfErrorOrSuccess(status) {
