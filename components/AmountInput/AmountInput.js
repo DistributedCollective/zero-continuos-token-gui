@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useViewport } from 'use-viewport'
-import { COLORS } from 'components/utils/constants'
-
-function getTokenName(symbol) {
-  if (symbol === 'COLLATERAL') {
-    return 'SOV'
-  }
-  if (symbol === 'BONDED') {
-    return 'MYNT'
-  }
-}
+import { COLORS, getTokenName } from 'components/utils/constants'
 
 function AmountInput({
   color = true,

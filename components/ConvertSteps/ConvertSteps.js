@@ -43,7 +43,7 @@ function reduceSteps(steps, [action, stepIndex, value]) {
 }
 
 function ConvertSteps({
-  toAnj,
+  toBonded,
   fromAmount,
   convertedTotal,
   onReturnHome,
@@ -169,7 +169,7 @@ function ConvertSteps({
             <StepperTitle
               fromAmount={fromAmount}
               convertedTotal={convertedTotal}
-              toAnj={toAnj}
+              toBonded={toBonded}
               status={stepperStatus}
             />
           </h1>
@@ -214,7 +214,7 @@ ConvertSteps.propTypes = {
   steps: PropTypes.arrayOf(PropTypes.array),
   fromAmount: PropTypes.object,
   convertedTotal: PropTypes.object,
-  toAnj: PropTypes.bool,
+  toBonded: PropTypes.bool,
   onReturnHome: PropTypes.func,
 }
 

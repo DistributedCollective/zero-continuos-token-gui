@@ -26,7 +26,7 @@ function ConvertForm() {
   const [formStatus, setFormStatus] = useState(CONVERTER_STATUSES.FORM)
   const [selectedOption, setSelectedOption] = useState(1)
   const [inverted, setInverted] = useState(true)
-  const toAnj = useMemo(() => !inverted, [inverted])
+  const toBonded = useMemo(() => !inverted, [inverted])
   const [legalChecked, setLegalChecked] = useState(false)
   const {
     amountSource,
@@ -36,7 +36,7 @@ function ConvertForm() {
     inputValueRecipient,
     inputValueSource,
     resetInputs,
-  } = useConvertInputs(options[selectedOption], toAnj)
+  } = useConvertInputs(options[selectedOption], toBonded)
   const tokenBalance = useTokenBalance(options[selectedOption])
 
   const { account } = useWalletAugmented()
@@ -59,9 +59,9 @@ function ConvertForm() {
   const handleConvertMax = useCallback(() => {
     handleManualInputChange(
       formatUnits(tokenBalance, { truncateToDecimalPlace: 3 }),
-      toAnj
+      toBonded
     )
-  }, [handleManualInputChange, toAnj, tokenBalance])
+  }, [handleManualInputChange, toBonded, tokenBalance])
 
   const handleConvert = useCallback(() => {
     setFormStatus(CONVERTER_STATUSES.STEPPER)
@@ -212,7 +212,7 @@ function ConvertForm() {
         reveal={
           formStatus === CONVERTER_STATUSES.STEPPER && (
             <ManageConversion
-              toAnj={toAnj}
+              toBonded={toBonded}
               fromAmount={amountSource}
               handleReturnHome={handleReturnHome}
             />

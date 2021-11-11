@@ -11,7 +11,7 @@ import { bigNum } from 'lib/utils'
 import ConvertSteps from 'components/ConvertSteps/ConvertSteps'
 import processing from './assets/loader.gif'
 
-function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
+function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
   const openOrder = useOpenOrder()
   const claimOrder = useClaimOrder()
   const waitForBatch = useWaitForBatchToFinish()
@@ -47,7 +47,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
       let steps = []
 
       // First we check for allowance if the direction is COLLATERAL -> BONDED
-      if (toAnj) {
+      if (toBonded) {
         const allowance = await getAllowance()
 
         // and if we need more, add a step to ask for an approval
@@ -78,9 +78,9 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
 
       // Next add the open order
       steps.push([
-        `Create ${toAnj ? 'buy' : 'sell'} order`,
+        `Create ${toBonded ? 'buy' : 'sell'} order`,
         {
-          onTxCreated: () => openOrder(fromAmount, toAnj),
+          onTxCreated: () => openOrder(fromAmount, toBonded),
 
           // We need to store a reference to the hash so we can use it in the following step
           onHashCreated: hash => {
@@ -101,7 +101,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
       steps.push([
         'Claim order',
         {
-          onTxCreated: () => claimOrder(openOrderHash, toAnj),
+          onTxCreated: () => claimOrder(openOrderHash, toBonded),
           onTxMined: hash => updateConvertedValue(hash),
           showDesc: true
         },
@@ -127,7 +127,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
     fromAmount,
     getAllowance,
     openOrder,
-    toAnj,
+    toBonded,
     updateConvertedValue,
   ])
 
@@ -136,7 +136,7 @@ function ManageConversion({ toAnj, fromAmount, handleReturnHome }) {
       {conversionSteps.length > 0 ? (
         <ConvertSteps
           steps={conversionSteps}
-          toAnj={toAnj}
+          toBonded={toBonded}
           fromAmount={fromAmount}
           convertedTotal={convertedTotal}
           onReturnHome={handleReturnHome}

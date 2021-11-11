@@ -22,7 +22,7 @@ function parseInputValue(inputValue, decimals) {
   return { amount, inputValue }
 }
 
-export function useConvertInputs(otherSymbol, toAnj = true) {
+export function useConvertInputs(otherSymbol, toBonded = true) {
   const [inputValueRecipient, setInputValueRecipient] = useState('')
   const [inputValueSource, setInputValueSource] = useState('0.0')
   const [amountRecipient, setAmountRecipient] = useState(bigNum(0))
@@ -31,7 +31,7 @@ export function useConvertInputs(otherSymbol, toAnj = true) {
   const {
     loading: bondingPriceLoading,
     price: bondingCurvePrice,
-  } = useBondingCurvePrice(amountSource, toAnj)
+  } = useBondingCurvePrice(amountSource, toBonded)
   const anjDecimals = useTokenDecimals('BONDED')
   const otherDecimals = useTokenDecimals(otherSymbol)
 
