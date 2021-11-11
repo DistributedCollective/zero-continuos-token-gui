@@ -7,7 +7,7 @@ const MODE_STYLE = {
   primary: css`
     background: ${COLORS.ACCENT};
     border: solid 0px transparent;
-    color: white;
+    color: ${COLORS.FONT_BUTTON_ACCENT};
   `,
   secondary: css`
     background-color: #ffffff;

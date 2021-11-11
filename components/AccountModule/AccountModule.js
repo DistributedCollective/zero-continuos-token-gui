@@ -91,7 +91,7 @@ function DisconnectedMode() {
                   font-size: 12px;
                 `}
               >
-                Ethereum Providers
+                RSK Providers
               </span>
               <div
                 css={`
@@ -226,7 +226,7 @@ const Container = styled.div`
 `
 const StyledPopover = styled(Popover)`
   overflow: hidden;
-  background: #fff;
+  background: ${COLORS.BACKGROUND};
   box-shadow: 0px 7px 24px rgba(0, 0, 0, 0.25);
   border: 0 solid transparent;
   width: 410px;
