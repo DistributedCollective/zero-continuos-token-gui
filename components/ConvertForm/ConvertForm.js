@@ -13,7 +13,7 @@ import { formatUnits } from 'lib/web3-utils'
 import { useConvertInputs } from './useConvertInputs'
 
 import question from './assets/question.svg'
-import { COLORS } from 'components/utils/constants'
+import { COLORS, getTokenName } from 'components/utils/constants'
 
 const options = ['COLLATERAL', 'BONDED']
 
@@ -145,14 +145,16 @@ function ConvertForm() {
             />
             <LabelWithOverlay
               label="The conversion amount is an estimate"
-              description="This tool uses a bonding curve to convert COLLATERAL into BONDED and
+              description={`This tool uses a bonding curve to convert ${getTokenName(
+                'COLLATERAL'
+              )} into ${getTokenName('BONDED')} and
                       back at a pre-defined rate. The price is calculated by an
                       automated market maker smart contract that defines a
                       relationship between token price and token supply. You can
-                      also convert COLLATERAL into other tokens such as ETH or DAI on
-                      various exchanges like
-                      Uniswap.
-"
+                      also convert ${getTokenName(
+                        'COLLATERAL'
+                      )} into other tokens on
+                      various exchanges.`}
               overlayPlacement="top"
             />
             <div
