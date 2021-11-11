@@ -86,7 +86,7 @@ function SplitScreen({ inverted, onInvert, reveal, primary, secondary }) {
     <div
       css={`
         ${ABSOLUTE_FILL};
-        background: #f9fafc;
+        background: ${COLORS.BACKGROUND};
       `}
     >
       {revealTransition.map(
