@@ -2,6 +2,7 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import env from 'lib/environment'
+import { COLORS } from '../components/utils/constants'
 
 const ANALYTICS_CODE = `
   var Countly = Countly || {};
@@ -91,8 +92,7 @@ export default class Document extends NextDocument {
           <style>{`
             html, body {
             min-height: 100vh;
-            background: no-repeat center/170px url(/splash.svg),
-                        linear-gradient(30deg, #FFC58F -24%, #FF7C7C 62%) !important;
+            background-color: ${COLORS.BACKGROUND} !important;
             }
           `}</style>
         </Head>
