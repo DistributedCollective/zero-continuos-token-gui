@@ -18,7 +18,7 @@ if (env('SENTRY_DSN')) {
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Monserrat';
-    src: url('/fonts/Monserrat-Regular.ttf');
+    src: url('/fonts/Montserrat-Regular.ttf');
   }
   body,
   button {
