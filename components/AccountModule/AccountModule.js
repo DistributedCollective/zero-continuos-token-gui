@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import styled from 'styled-components'
 import EthIdenticon from 'components/EthIdenticon/EthIdenticon'
-import { trackEvent } from 'lib/analytics'
 import { useWalletAugmented } from 'lib/wallet'
 import { shortenAddress } from 'lib/web3-utils'
 
@@ -28,14 +27,7 @@ function DisconnectedMode() {
 
   const activateAndTrack = useCallback(
     async providerId => {
-      const ok = await activate(providerId)
-      if (ok) {
-        trackEvent('web3_connect', {
-          segmentation: {
-            provider: providerId,
-          },
-        })
-      }
+      await activate(providerId)
     },
     [activate]
   )
