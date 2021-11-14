@@ -15,6 +15,7 @@ import { COLORS } from 'components/utils/constants'
 
 function AccountModule() {
   const { account } = useWalletAugmented()
+  console.log(account)
   return account ? <ConnectedMode /> : <DisconnectedMode />
 }
 
@@ -103,16 +104,6 @@ function DisconnectedMode() {
                   name="Frame"
                   onActivate={() => activateAndTrack('frame')}
                   image={frame}
-                />
-                <ProviderButton
-                  name="Fortmatic"
-                  onActivate={() => activateAndTrack('fortmatic')}
-                  image={fortmatic}
-                />
-                <ProviderButton
-                  name="Portis"
-                  onActivate={() => activateAndTrack('portis')}
-                  image={portis}
                 />
               </div>
             </div>
@@ -223,7 +214,7 @@ const StyledPopover = styled(Popover)`
   border: 0 solid transparent;
   width: 410px;
   max-width: 90vw;
-  height: 313px;
+  height: 165px;
   left: 982px;
   top: 103px;
 
