@@ -1,19 +1,9 @@
 import React from 'react'
-import * as Sentry from '@sentry/browser'
 import NextHead from 'next/head'
 import { useSpring, animated } from 'react-spring'
 import { createGlobalStyle } from 'styled-components'
 import { ViewportProvider } from 'use-viewport'
 import { WalletProvider } from 'lib/wallet'
-import env from 'lib/environment'
-
-if (env('SENTRY_DSN')) {
-  Sentry.init({
-    dsn: env('SENTRY_DSN'),
-    environment: env('NODE_ENV'),
-    release: 'convert.aragon.org@' + env('BUILD'),
-  })
-}
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -22,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body,
   button {
-    font-family: 'Monserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   body,
   html {
