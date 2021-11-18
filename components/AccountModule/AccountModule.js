@@ -100,11 +100,6 @@ function DisconnectedMode() {
                   onActivate={() => activateAndTrack('injected')}
                   image={metamask}
                 />
-                <ProviderButton
-                  name="Frame"
-                  onActivate={() => activateAndTrack('frame')}
-                  image={frame}
-                />
               </div>
             </div>
           </StyledPopover>
@@ -212,7 +207,7 @@ const StyledPopover = styled(Popover)`
   background: ${COLORS.BACKGROUND};
   box-shadow: 0px 7px 24px rgba(0, 0, 0, 0.25);
   border: 0 solid transparent;
-  width: 410px;
+  width: 130px;
   max-width: 90vw;
   height: 165px;
   left: 982px;
@@ -269,7 +264,7 @@ const ButtonBase = styled.div`
   display: flex;
   align-items: center;
   text-align: left;
-  padding: 0 8px 0 16px;
+  padding: 0 16px 0 16px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
