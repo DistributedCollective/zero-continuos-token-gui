@@ -6,14 +6,18 @@ import {
   useAllowance,
   useClaimOrderReceiptAmount,
   useWaitForBatchToFinish,
+  useWaitForTx
 } from 'lib/web3-contracts'
 import { bigNum } from 'lib/utils'
 import ConvertSteps from 'components/ConvertSteps/ConvertSteps'
+
+import { useStore } from 'components/utils/store';
 
 function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
   const openOrder = useOpenOrder()
   const claimOrder = useClaimOrder()
   const waitForBatch = useWaitForBatchToFinish()
+  const waitForTx = useWaitForTx()
   const claimOrderReceiptAmount = useClaimOrderReceiptAmount()
   const changeAllowance = useApprove()
   const getAllowance = useAllowance()
@@ -55,7 +59,7 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
             'Raise approval',
             {
               onTxCreated: () => changeAllowance(fromAmount),
-              showDesc: true
+              showDesc: true,
             },
           ])
 
@@ -68,7 +72,7 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
               'Reset approval',
               {
                 onTxCreated: () => changeAllowance(0),
-                showDesc: true
+                showDesc: true,
               },
             ])
           }
@@ -85,7 +89,8 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
           onHashCreated: hash => {
             openOrderHash = hash
           },
-          showDesc: true
+          onWaitForTx: (hash) => waitForTx(hash),
+          showDesc: true,
         },
       ])
 
@@ -93,7 +98,7 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
         'Wait for batch to finish',
         {
           onWaitCondition: () => waitForBatch(openOrderHash),
-          showDesc: false
+          showDesc: false,
         },
       ])
       // And finally the claim order
@@ -102,7 +107,7 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
         {
           onTxCreated: () => claimOrder(openOrderHash, toBonded),
           onTxMined: hash => updateConvertedValue(hash),
-          showDesc: true
+          showDesc: true,
         },
       ])
 
@@ -149,8 +154,7 @@ function ManageConversion({ toBonded, fromAmount, handleReturnHome }) {
             width: 100vw;
             height: 100vh;
           `}
-        >
-        </div>
+        ></div>
       )}
     </>
   )
