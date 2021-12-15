@@ -62,38 +62,34 @@ function ManageConversion({ handleReturnHome }) {
 
         // and if we need more, add a step to ask for an approval
         const requiresAllowance = allowance.lt(bigNum(amountSource)) && savedSteps.length === 0;
-        const savedIsAllowance = savedSteps.length > 0 && (savedSteps[0].name === STEP_RESET_APPROVAL || savedSteps[0].name === STEP_RAISE_APPROVAL);
+        const savedIsResetAllowance = savedSteps.length > 0 && (savedSteps[0].name === STEP_RESET_APPROVAL);
+        const savedIsRaiseApproval = savedSteps.length > 0 && (savedSteps[0].name === STEP_RAISE_APPROVAL || savedSteps[1].name === STEP_RAISE_APPROVAL);
 
-        if ( requiresAllowance || savedIsAllowance ) {
-            steps.unshift([
-              'Raise approval',
-              {
-                onTxCreated: () => changeAllowance(amountSource),
-                onResumeWait: (hash) => waitForTx(hash),
-                showDesc: true,
-                name: STEP_RAISE_APPROVAL
-              },
-            ])
-
-          // Then there's the case when a user has an allowance set to the market maker contract
-          // but wants to convert even more tokens this time. When dealing with this case
-          // we want to first prepend a transaction to reset the allowance back to zero
-          // (before raising it in the next transaction from above).
-          // Note: the second part of the if statement is a workaround. When state is saved and restored 
-          //       and the buy order has been created already, the transfer was made and allowance is zero
-          //       resulting on this step not to be included and not matching the saved steps.
-          //       This is not a nice fix but due to time constraints is better than nothing.
-          if (!allowance.isZero() || savedIsAllowance) {
-            steps.unshift([
-              'Reset approval',
-              {
-                onTxCreated: () => changeAllowance(0),
-                onResumeWait: (hash) => waitForTx(hash),
-                showDesc: true,
-                name: STEP_RESET_APPROVAL
-              },
-            ])
-          }
+        if (requiresAllowance || savedIsRaiseApproval) {
+          steps.unshift([
+            'Raise approval',
+            {
+              onTxCreated: () => changeAllowance(amountSource),
+              onResumeWait: (hash) => waitForTx(hash),
+              showDesc: true,
+              name: STEP_RAISE_APPROVAL
+            },
+          ])
+        }
+        // Then there's the case when a user has an allowance set to the market maker contract
+        // but wants to convert even more tokens this time. When dealing with this case
+        // we want to first prepend a transaction to reset the allowance back to zero
+        // (before raising it in the next transaction from above).
+        if(requiresAllowance || savedIsResetAllowance) {
+          steps.unshift([
+            'Reset approval',
+            {
+              onTxCreated: () => changeAllowance(0),
+              onResumeWait: (hash) => waitForTx(hash),
+              showDesc: true,
+              name: STEP_RESET_APPROVAL
+            },
+          ])
         }
       }
 
