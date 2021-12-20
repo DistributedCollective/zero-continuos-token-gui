@@ -14,16 +14,23 @@ import { useConvertInputs } from './useConvertInputs'
 
 import question from './assets/question.svg'
 import { COLORS, getTokenName } from 'components/utils/constants'
+import { useStore } from 'components/utils/store'
 
 const options = ['COLLATERAL', 'BONDED']
 
 const CONVERTER_STATUSES = {
-  FORM: Symbol('STATE_FORM'),
-  STEPPER: Symbol('STATE_STEPPER'),
+  FORM: 'STATE_FORM',
+  STEPPER: 'STATE_STEPPER',
 }
 
 function ConvertForm() {
-  const [formStatus, setFormStatus] = useState(CONVERTER_STATUSES.FORM)
+  const [formStatus, setFormStatus, setAmountSource, setIsBonded, clearState] = useStore(state => [
+    state.formStatus,
+    state.setFormStatus,
+    state.setAmountSource,
+    state.setIsBonded,
+    state.clearState,
+  ])
   const [selectedOption, setSelectedOption] = useState(1)
   const [inverted, setInverted] = useState(true)
   const toBonded = useMemo(() => !inverted, [inverted])
@@ -63,14 +70,18 @@ function ConvertForm() {
     )
   }, [handleManualInputChange, toBonded, tokenBalance])
 
-  const handleConvert = useCallback(() => {
+  const handleConvert = useCallback((amount, isBonded) => {
     setFormStatus(CONVERTER_STATUSES.STEPPER)
+    setAmountSource(amount)
+    setIsBonded(isBonded)
   }, [])
 
   const handleReturnHome = useCallback(() => {
+    console.log('handleReturnHome')
     resetInputs()
+    clearState()
     setFormStatus(CONVERTER_STATUSES.FORM)
-  }, [resetInputs])
+  }, []);
 
   const submitButtonDisabled = Boolean(
     !account ||
@@ -94,94 +105,109 @@ function ConvertForm() {
       `}
     >
       <NavBar logoMode={navbarLogoMode} />
-      <SplitScreen
-        inverted={inverted}
-        onInvert={handleInvert}
-        primary={
-          <div
-            css={`
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-            `}
-          >
-            <AmountInput
-              error={inputError}
-              symbol={inverted ? 'BONDED' : 'COLLATERAL'}
-              color={false}
-              value={inputValueSource}
-              disabled={inputDisabled}
-              {...bindOtherInput}
-            />
-            <Balance
-              tokenBalance={tokenBalance}
-              tokenAmountToConvert={amountSource}
-            />
-            {account && (
-              <MaxButton
-                css={`
-                  margin-top: 12px;
-                `}
-                onClick={handleConvertMax}
-              >
-                Convert all
-              </MaxButton>
-            )}
-          </div>
-        }
-        secondary={
-          <div
-            css={`
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-            `}
-          >
-            <AmountInput
-              symbol={inverted ? 'COLLATERAL' : 'BONDED'}
-              color={true}
-              value={inputValueRecipient}
-              onChange={() => null}
-            />
-            <LabelWithOverlay
-              label="The conversion amount is an estimate"
-              description={`This tool uses a bonding curve to convert ${getTokenName(
-                'COLLATERAL'
-              )} into ${getTokenName('BONDED')} and
-                      back at a pre-defined rate. The price is calculated by an
-                      automated market maker smart contract that defines a
-                      relationship between token price and token supply.`}
-              overlayPlacement="top"
-            />
+      { inputDisabled && (
+        <div
+          css={`
+            width: 100%;
+            height: 100%;
+            color: ${COLORS.FONT};
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            font-size: 32px;
+          `}
+        >Please connect your wallet to continue.</div>
+      )} 
+      {!inputDisabled && (
+        <SplitScreen
+          inverted={inverted}
+          onInvert={handleInvert}
+          primary={
             <div
               css={`
-                position: relative;
-                width: 100vw;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                padding-left: 30px;
-                padding-right: 30px;
               `}
             >
-              <Button disabled={submitButtonDisabled} onClick={handleConvert}>
-                Convert
-              </Button>
-              <Docs />
+              <AmountInput
+                error={inputError}
+                symbol={inverted ? 'BONDED' : 'COLLATERAL'}
+                color={false}
+                value={inputValueSource}
+                disabled={inputDisabled}
+                {...bindOtherInput}
+              />
+              <Balance
+                tokenBalance={tokenBalance}
+                tokenAmountToConvert={amountSource}
+              />
+              {account && (
+                <MaxButton
+                  css={`
+                    margin-top: 12px;
+                  `}
+                  onClick={handleConvertMax}
+                >
+                  Convert all
+                </MaxButton>
+              )}
             </div>
-          </div>
-        }
-        reveal={
-          formStatus === CONVERTER_STATUSES.STEPPER && (
-            <ManageConversion
-              toBonded={toBonded}
-              fromAmount={amountSource}
-              handleReturnHome={handleReturnHome}
-            />
-          )
-        }
-      />
+          }
+          secondary={
+            <div
+              css={`
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              `}
+            >
+              <AmountInput
+                symbol={inverted ? 'COLLATERAL' : 'BONDED'}
+                color={true}
+                value={inputValueRecipient}
+                onChange={() => null}
+              />
+              <LabelWithOverlay
+                label="The conversion amount is an estimate"
+                description={`This tool uses a bonding curve to convert ${getTokenName(
+                  'COLLATERAL'
+                )} into ${getTokenName('BONDED')} and
+                      back at a pre-defined rate. The price is calculated by an
+                      automated market maker smart contract that defines a
+                      relationship between token price and token supply.`}
+                overlayPlacement="top"
+              />
+              <div
+                css={`
+                  position: relative;
+                  width: 100vw;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  padding-left: 30px;
+                  padding-right: 30px;
+                `}
+              >
+                <Button disabled={submitButtonDisabled} onClick={() => handleConvert(amountSource, toBonded)}>
+                  Convert
+                </Button>
+                <Docs />
+              </div>
+            </div>
+          }
+          reveal={
+            formStatus === CONVERTER_STATUSES.STEPPER && (
+              <ManageConversion
+                handleReturnHome={handleReturnHome}
+              />
+            )
+          }
+        />
+      )}
     </div>
   )
 }
@@ -230,10 +256,10 @@ function Docs() {
       `}
     >
       <li>
-        <Anchor href="https://bonded.aragon.org/">About</Anchor>
+        <Anchor href="https://live.sovryn.app">Sovryn</Anchor>
       </li>
       <li>
-        <Anchor href="https://help.aragon.org/article/41-aragon-court">
+        <Anchor href="https://wiki.sovryn.app/en/sovryn-dapp/origins/mynt">
           Docs
         </Anchor>
       </li>
