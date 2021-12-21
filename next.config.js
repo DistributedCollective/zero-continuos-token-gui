@@ -1,19 +1,11 @@
 const path = require('path')
-const { execSync } = require('child_process')
 const withCSS = require('@zeit/next-css')
 const withImages = require('next-images')
 const withFonts = require('next-fonts')
 const { fullEnvironment } = require('./lib/environment')
-const { version } = require('./package.json')
 
-const COMMIT_SHA =
-  process.env.COMMIT_SHA ||
-  process.env.NOW_GITHUB_COMMIT_SHA ||
-  execSync("git log --pretty=format:'%h' -n 1")
-
-const BUILD = process.env.BUILD || `${version}-${COMMIT_SHA.slice(0, 7)}`
-
-const debug = process.env.NODE_ENV !== "production";
+const basePath = process.env.BASE_PATH;
+const assetPrefix = process.env.ASSET_PREFIX;
 
 const ENV = fullEnvironment()
 
@@ -33,7 +25,8 @@ module.exports = withCSS(
       devIndicators: {
         autoPrerender: false,
       },
-      assetPrefix: !debug ? 'https://swamp-thing-sovryn.github.io/zero-continuos-token-gui/' : '',
+      basePath: !!basePath ? basePath : '',
+      assetPrefix: !!assetPrefix ? assetPrefix : '',
     })
-  )
+  ),
 )
