@@ -14,8 +14,8 @@ const { fullEnvironment } = require('./lib/environment')
 // const BUILD = process.env.BUILD || `${version}-${COMMIT_SHA.slice(0, 7)}`
 
 // const debug = process.env.NODE_ENV !== "production";
-const basePath = !!process.env.BASE_PATH;
-const assetPrefix = !!process.env.ASSET_PREFIX;
+const basePath = process.env.BASE_PATH;
+const assetPrefix = process.env.ASSET_PREFIX;
 
 const ENV = fullEnvironment()
 
@@ -35,8 +35,8 @@ module.exports = withCSS(
       devIndicators: {
         autoPrerender: false,
       },
-      basePath: basePath ? basePath : '',
-      assetPrefix: assetPrefix ? assetPrefix : '',
+      basePath: !!basePath ? basePath : '',
+      assetPrefix: !!assetPrefix ? assetPrefix : '',
     })
   ),
 )
