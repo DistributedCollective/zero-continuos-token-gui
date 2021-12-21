@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  sovryn-admin-panel:
+    build: ./
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - 8080:8080
+    stdin_open: true
