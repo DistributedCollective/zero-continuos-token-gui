@@ -2,7 +2,7 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import produce from 'immer'
 import { bigNum } from 'lib/utils'
-const persistState = (get, set) => (updateFn) => {
+const persistState = (get, set) => updateFn => {
   const currentState = get()
   set(updateFn(currentState))
 }
@@ -24,51 +24,51 @@ export const useStore = create(
 
       return {
         ...initialStepState,
-        setStepperStatus: (status) =>
+        setStepperStatus: status =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.stepperStatus = status
             })
           ),
-        setStepActive: (index) =>
+        setStepActive: index =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.savedSteps[index].active = true
             })
           ),
         setStepHash: (index, hash) =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.savedSteps[index].hash = hash
             })
           ),
         setStepStatus: (index, status) =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.savedSteps[index].status = status
             })
           ),
-        setActiveStage: (stepNumber) =>
+        setActiveStage: stepNumber =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.stepperStage = stepNumber
             })
           ),
-        setSteps: (steps) =>
+        setSteps: steps =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.savedSteps = steps
             })
           ),
-        setFormStatus: (formStatus) =>
+        setFormStatus: formStatus =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.formStatus = formStatus
             })
           ),
         clearState: () =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.formStatus = initialStepState.formStatus
               state.stepperStage = initialStepState.stepperStage
               state.toBonded = initialStepState.toBonded
@@ -78,21 +78,21 @@ export const useStore = create(
               state.stepperStatus = initialStepState.stepperStatus
             })
           ),
-        setAmountSource: (amount) =>
+        setAmountSource: amount =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.amountSource = amount
             })
           ),
-        setOrderHash: (amount) =>
+        setOrderHash: amount =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.openOrderHash = amount
             })
           ),
-        setIsBonded: (bonded) =>
+        setIsBonded: bonded =>
           updateState(
-            produce((state) => {
+            produce(state => {
               state.toBonded = bonded
             })
           ),
@@ -100,6 +100,20 @@ export const useStore = create(
     },
     {
       name: 'conversion-status', // name of item in the storage (must be unique)
+    }
+  )
+)
+
+export const useShowBanner = create(
+  persist(
+    (set, get) => {
+      return {
+        showBanner: true,
+        hideBanner: () => set({ showBanner: false }),
+      }
+    },
+    {
+      name: 'banner-status',
     }
   )
 )
