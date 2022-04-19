@@ -28,7 +28,7 @@ const WarningBanner = () => {
 						color: white;
 					}
         `}
-        href="https://wiki.sovryn.app/e/en/sovryn-dapp/subprotocols/bonding-curve-trading"
+        href="https://wiki.sovryn.app/en/sovryn-dapp/subprotocols/bonding-curve-trading"
         rel="noopener noreferrer"
         target="_blank"
       >
