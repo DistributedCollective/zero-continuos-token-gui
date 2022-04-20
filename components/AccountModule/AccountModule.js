@@ -6,16 +6,12 @@ import EthIdenticon from 'components/EthIdenticon/EthIdenticon'
 import { useWalletAugmented } from 'lib/wallet'
 import { shortenAddress } from 'lib/web3-utils'
 
-import fortmatic from './provider-icons/fortmatic.svg'
-import frame from './provider-icons/frame.svg'
 import metamask from './provider-icons/metamask.svg'
-import portis from './provider-icons/portis.svg'
 import lightning from './lightning.svg'
 import { COLORS } from 'components/utils/constants'
 
 function AccountModule() {
   const { account } = useWalletAugmented()
-  console.log(account)
   return account ? <ConnectedMode /> : <DisconnectedMode />
 }
 
