@@ -13,7 +13,7 @@
     "lint": "eslint ./components ./lib ./pages",
     "serve": "serve dist -p 3000",
     "start": "next dev -p 8080",
-    "start:mainnet": "CHAIN_ID=1 npm start",
+    "start:mainnet": "CHAIN_ID=30 npm start",
     "start:rinkeby": "CHAIN_ID=4 npm start",
     "test": "jest"
   },
